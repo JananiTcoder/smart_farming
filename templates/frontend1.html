@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden; /* Prevent scrolling */
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-image: url('{{ url_for("static", filename="home.png") }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+
+    .start-button {
+      position: absolute;
+      top: 70%; /* ✅ Stays exactly here */
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 40px;
+      font-size: 20px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .start-button:hover {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+  <button class="start-button" onclick="window.location.href='/predict'">Start</button>
+
+</body>
+</html>

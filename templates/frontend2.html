@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Acrifarm Dashboard</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .section {
+      width: 100%;
+      position: relative;
+      text-align: center;
+    }
+
+    .bg-image {
+      width: 100%;
+      display: block;
+    }
+
+    .overlay {
+      position: absolute;
+      color: white;
+      font-size: 24px;
+      padding: 15px;
+      border-radius: 15px;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .main-overlay {
+      top: 34.55%;
+      left: 72%;
+      max-width: 80%;
+    }
+
+    .sensor-list {
+      margin-top: 15px;
+      text-align: left;
+      font-size: 35px;
+      line-height: 1.5;
+    }
+
+    .sensor-list span {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .nav-link {
+      position: absolute;
+      z-index: 2;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    footer {
+      background-color: #014201;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .overlay {
+        font-size: 18px;
+        top: 10%;
+        left: 5%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <img src="{{ url_for('static', filename='homepg.png') }}" alt="Acrifarm Layout" class="bg-image">
+
+    <div class="nav-link" data-target="sense" style="top: 0.5%; left: 6%; width: 70px; height: 30px;"></div>
+    <div class="nav-link" data-target="crop" style="top: 0.5%; left: 11%; width: 70px; height: 30px;"></div>
+    <div class="nav-link" data-target="action" style="top: 0.5%; left: 16.4%; width: 70px; height: 30px;"></div>
+    <div class="nav-link" data-target="cost" style="top: 0.5%; left: 22%; width: 70px; height: 30px;"></div>
+    <div class="nav-link" data-target="about" style="top: 0.5%; left: 89%; width: 70px; height: 30px;"></div>
+
+    <div id="sense" class="overlay main-overlay">
+      <div class="sensor-list">
+        <span id="soilMoisture">{{ soilMoisture }}</span><br>
+        <span id="temperature">{{ temperature }}</span> °C<br>
+        <span id="humidity">{{ humidity }}</span>%<br>
+        <span id="ph">{{ ph }}</span><br>
+        <span id="light">{{ light }}</span><br>
+        <span id="rainDigital">{{ rainDigital }}</span><br>
+        <span id="rainAnalog">{{ rainAnalog }}</span><br>
+      </div>
+    </div>
+
+    <div id="crop" class="overlay" style="top: 50.5%; left: 70%;">
+      <div class="sensor-list">
+        <span id="crop">{{ crop }}</span>
+      </div>
+    </div>
+
+    <div id="action" class="overlay" style="top: 64%; left: 20%;">
+      <div class="sensor-list">
+        <span id="action">{{ action }}</span>
+      </div>
+    </div>
+
+    <div id="cost" class="overlay" style="top: 78%; left: 20%;">
+      <div class="sensor-list">
+        <span id="cost">{{ cost }}</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="about" style="height: 1px;"></div>
+
+  <footer>
+    &copy; 2025 Acrifarm - All rights reserved
+  </footer>
+
+  <script>
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function () {
+        const targetId = this.getAttribute('data-target');
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          const yOffset = -100;
+          const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
